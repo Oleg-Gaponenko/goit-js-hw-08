@@ -87,4 +87,16 @@ gallery.addEventListener('click', handleClick);
 
 function handleClick(event) {
     event.preventDefault();
+
+    if(event.target.nodeName === 'IMG') {
+        basicLightbox.create(`
+    <div class="modal">
+     <div class="thumb">
+      <img width="1112" height="640" src="${event.target.dataset.source}">
+     </div>
+    </div>
+        `).show()
+    } else {
+        return;
+    }
 }
