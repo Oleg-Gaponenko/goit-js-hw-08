@@ -89,14 +89,18 @@ function handleClick(event) {
     event.preventDefault();
 
     if(event.target.nodeName === 'IMG') {
-        basicLightbox.create(`
+       const instance = basicLightbox.create(`
     <div class="modal">
-     <div class="thumb">
-      <img width="1112" height="640" src="${event.target.dataset.source}">
-     </div>
+      <img src="${event.target.dataset.source}">
     </div>
-        `).show()
-    } else {
-        return;
+    `, {
+        onShow: (instance) => {
+            instance.element().querySelector('.modal').onclick = () => {
+                instance.close();
+            };
+        }
+    });
+
+    instance.show();
     }
 }
